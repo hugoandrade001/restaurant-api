@@ -28,3 +28,21 @@ model MenuItem {
   price       Float
   createdAt   DateTime @default(now())
 }
+
+model Order {
+  id          Int          @id @default(autoincrement())
+  customer    Customer     @relation(fields: [customerId], references: [id])
+  customerId  Int
+  items       OrderItem[]
+  status      String       @default("pending")
+  createdAt   DateTime     @default(now())
+}
+
+model OrderItem {
+  id          Int       @id @default(autoincrement())
+  order       Order     @relation(fields: [orderId], references: [id])
+  orderId     Int
+  menuItem    MenuItem  @relation(fields: [menuItemId], references: [id])
+  menuItemId  Int
+  quantity    Int       @default(1)
+}
