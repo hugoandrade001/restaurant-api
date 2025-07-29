@@ -2,8 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { orderService, OrderService } from "./order.service";
 
 export class OrderController {
-
-
     async createOrder(req: Request, res: Response, next: NextFunction) {
         try {
             const order = await orderService.createOrder(req.body)
@@ -16,3 +14,4 @@ export class OrderController {
         }
     }
 }
+export const orderController: OrderController = new OrderController()
